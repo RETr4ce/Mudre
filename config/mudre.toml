@@ -1,0 +1,6 @@
+[ctftime]
+ctftime-event = "https://ctftime.org/api/v1/events/?limit=100"
+ctftime-writeup = "https://ctftime.org/writeups/rss/"
+ctftime-avatar = "https://pbs.twimg.com/profile_images/2189766987/ctftime-logo-avatar_400x400.png"
+discord-webhook = ""
+database-path = ""
