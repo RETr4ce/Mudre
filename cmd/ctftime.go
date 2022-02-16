@@ -19,7 +19,7 @@ import (
 //init function to the root program and add logging
 func init() {
 	RootCmd.AddCommand(ctftimeCmd)
-	ctftimeCmd.AddCommand(writeupCmd, pullCmd, upcomingCmd, updateCmd) // you can add subdommands to the root command.
+	ctftimeCmd.AddCommand(ctftimeWriteupCmd, ctftimePullCmd, ctftimeUpcomingCmd, ctftimeUpdateCmd) // you can add subdommands to the root command.
 }
 
 //Createcommand ctftime
@@ -29,7 +29,7 @@ var ctftimeCmd = &cobra.Command{
 }
 
 //Subcommand to post the upcoming data to Discord
-var upcomingCmd = &cobra.Command{
+var ctftimeUpcomingCmd = &cobra.Command{
 	Use:   "upcoming",
 	Short: "Posting upcoming",
 	Long:  "Posting upcoming events 2 days prior to Discord",
@@ -37,7 +37,7 @@ var upcomingCmd = &cobra.Command{
 }
 
 //Subcommand to post the writeups data to Discord
-var writeupCmd = &cobra.Command{
+var ctftimeWriteupCmd = &cobra.Command{
 	Use:   "writeup",
 	Short: "Posting writeups",
 	Long:  "Posting the latest event writeups to Discord",
@@ -45,14 +45,14 @@ var writeupCmd = &cobra.Command{
 }
 
 //Subcommand to parse Events from CTFTime website
-var pullCmd = &cobra.Command{
+var ctftimePullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "Pull latest events and writeups",
 	Long:  "Pull and cache latest events and writeups into a SQLite database",
 	Run:   ctftPull,
 }
 
-var updateCmd = &cobra.Command{
+var ctftimeUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update latest events times",
 	Long:  "Update with the latest pushed dates and times with the database",
