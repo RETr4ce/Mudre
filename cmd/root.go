@@ -45,8 +45,8 @@ func Execute() {
 
 func config() {
 	viper.SetConfigName("mudre")
-	viper.AddConfigPath("./config/")
 	viper.AddConfigPath("$HOME/.mudre")
+	viper.AddConfigPath("./config/")
 	viper.AddConfigPath(".")
 	viper.AddConfigPath("toml")
 
