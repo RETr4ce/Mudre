@@ -19,7 +19,7 @@ import (
 //init function to the root program and add logging
 func init() {
 	RootCmd.AddCommand(ctftimeCmd)
-	ctftimeCmd.AddCommand(writeupCmd, pullCmd, upcomingCmd) // you can add subdommands to the root command.
+	ctftimeCmd.AddCommand(writeupCmd, pullCmd, upcomingCmd, updateCmd) // you can add subdommands to the root command.
 }
 
 //Createcommand ctftime
@@ -50,6 +50,14 @@ var pullCmd = &cobra.Command{
 	Short: "Pull latest events and writeups",
 	Long:  "Pull and cache latest events and writeups into a SQLite database",
 	Run:   ctftPull,
+}
+
+
+var updateCmd = &cobra.Command{
+	Use:   "update",
+	Short: "Update latest events times",
+	Long:  "Update with the latest pushed dates and times with the database",
+	Run:   ctftUpdate,
 }
 
 //Checks if pushDiscord is not 1 before posting it to Discord. Safetycheck for duplicates
