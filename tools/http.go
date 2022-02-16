@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"crypto/tls"
 
 	"github.com/spf13/viper"
 )
@@ -40,10 +39,7 @@ func PostToDiscord(jsonData []byte) {
 
 func GetDataFromUrl(baseURL string) ([]byte, error) {
 
-	//During testing the certificate broke of CTFTime. This will ignore the verify the legitimacy of the server
-	tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true},}
-	//init http client, build up the request headers and send request
-	client := &http.Client{Transport: tr}
+	client := &http.Client{}
 	req, _ := http.NewRequest("GET", baseURL, nil)
 
 	//Prepare headers. Some websites want a user-agent else it returns an error.
