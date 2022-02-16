@@ -59,7 +59,7 @@ func ctftUpcoming(cmd *cobra.Command, args []string) {
 	InfoLogger.Println("[-] Starting upcoming events")
 
 	InfoLogger.Println("[+] Connecting to sqlite database")
-	database, _ := sql.Open("sqlite3", viper.GetString("ctftime.database-path"))
+	database, _ := sql.Open("sqlite3", viper.GetString("database-path"))
 
 	InfoLogger.Println("[+] Prepairing SQL statements")
 	tx, _ := database.Begin()
@@ -140,7 +140,7 @@ func ctftWriteup(cmd *cobra.Command, args []string) {
 	InfoLogger.Println("[-] Starting latest writeups")
 
 	InfoLogger.Println("[+] Connecting to sqlite database")
-	database, _ := sql.Open("sqlite3", viper.GetString("ctftime.database-path"))
+	database, _ := sql.Open("sqlite3", viper.GetString("database-path"))
 
 	InfoLogger.Println("[+] Prepairing SQL statements")
 	tx, _ := database.Begin()
@@ -233,7 +233,7 @@ func ctftPull(cmd *cobra.Command, args []string) {
 
 	InfoLogger.Println("[-] Start pulling data")
 	InfoLogger.Println("[+] Connecting to sqlite database")
-	database, _ := sql.Open("sqlite3", viper.GetString("ctftime.database-path"))
+	database, _ := sql.Open("sqlite3", viper.GetString("database-path"))
 	InfoLogger.Println("[+] Prepairing SQL statements")
 	tx, _ := database.Begin()
 
