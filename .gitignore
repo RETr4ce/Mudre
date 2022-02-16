@@ -15,4 +15,3 @@ go.mod
 logs.txt
 cmd/test.go
 .vscode/launch.json
-sqlite.db
