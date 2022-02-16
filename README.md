@@ -16,5 +16,6 @@ URL - https://ctftime.org/
 * Download the latest events in a SQLite database every hour. 
 * Posts upcoming events 2 days prior to Discord.
 * Posts latest writeups to Discord 
+* Update the latest dates
 
 ![alt text](https://github.com/RETr4ce/mudre/blob/main/images/image-20220215081215224.png?raw=true)
