@@ -52,7 +52,6 @@ var pullCmd = &cobra.Command{
 	Run:   ctftPull,
 }
 
-
 var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update latest events times",
@@ -314,32 +313,33 @@ func ctftUpdate(cmd *cobra.Command, args []string) {
 
 	body, _ := tools.GetDataFromUrl(viper.GetString("ctftime.ctftime-event"))
 
-		//Unmarshal into a slice
-		var dataObjects []dataEvent
-		err := json.Unmarshal(body, &dataObjects)
+	//Unmarshal into a slice
+	var dataObjects []dataEvent
+	err := json.Unmarshal(body, &dataObjects)
+
+	if err != nil {
+		ErrorLogger.Println("[+] ", err)
+	}
+
+	for _, value := range dataObjects {
+		var date_difference float64
+
+		//query row and compare the time differences
+		err := stmtCompare.QueryRow(value.Start, value.Id).Scan(&date_difference)
 
 		if err != nil {
-			ErrorLogger.Println("[+] ", err)
+			ErrorLogger.Println("[*] ", err)
 		}
 
-		for _, value := range dataObjects {
-			var date_difference float64
-			
-			//query row and compare the time differences
-			err := stmtCompare.QueryRow(value.Start, value.Id).Scan(&date_difference)
+		// if time differences is not 0 then update with the latest times from ctftime
+		if date_difference != 0 {
+			_, err = stmtUpdate.Exec(value.Start, value.Finish, value.Id)
 
 			if err != nil {
 				ErrorLogger.Println("[*] ", err)
 			}
-
-			// if time differences is not 0 then update with the latest times from ctftime
-			if date_difference != 0 {
-				_, err = stmtUpdate.Exec(value.Start, value.Finish, value.Id)
-				
-				if err != nil {
-					ErrorLogger.Println("[*] ", err)
-				}
-			}
 		}
+	}
 	tx.Commit()
+	InfoLogger.Println("[-] done")
 }
