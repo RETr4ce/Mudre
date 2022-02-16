@@ -290,3 +290,48 @@ func ctftPull(cmd *cobra.Command, args []string) {
 	tx.Commit()
 	InfoLogger.Println("[-] done")
 }
+
+func ctftUpdate(cmd *cobra.Command, args []string) {
+
+	InfoLogger.Println("[-] Start updating data")
+	InfoLogger.Println("[+] Connecting to sqlite database")
+	database, _ := sql.Open("sqlite3", viper.GetString("database-path"))
+	InfoLogger.Println("[+] Prepairing SQL statements")
+	tx, _ := database.Begin()
+
+	//Compare the dates and return the differences
+	stmtCompare, _ := tx.Prepare("SELECT JULIANDAY(?) - JULIANDAY(start) AS date_difference FROM ctftimeEvents WHERE id=?")
+	//If date is not 0 update the row with the latest dates
+	stmtUpdate, _ := tx.Prepare("UPDATE ctftimeEvents SET start = ?, finish = ? WHERE id = ?")
+
+	body, _ := tools.GetDataFromUrl(viper.GetString("ctftime.ctftime-event"))
+
+		//Unmarshal into a slice
+		var dataObjects []dataEvent
+		err := json.Unmarshal(body, &dataObjects)
+
+		if err != nil {
+			ErrorLogger.Println("[+] ", err)
+		}
+
+		for _, value := range dataObjects {
+			var date_difference float64
+			
+			//query row and compare the time differences
+			err := stmtCompare.QueryRow(value.Start, value.Id).Scan(&date_difference)
+
+			if err != nil {
+				ErrorLogger.Println("[*] ", err)
+			}
+
+			// if time differences is not 0 then update with the latest times from ctftime
+			if date_difference != 0 {
+				_, err = stmtUpdate.Exec(value.Start, value.Finish, value.Id)
+				
+				if err != nil {
+					ErrorLogger.Println("[*] ", err)
+				}
+			}
+		}
+	tx.Commit()
+}
