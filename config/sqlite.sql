@@ -48,6 +48,20 @@ CREATE TABLE ctftimeWriteup (
 );
 
 
+-- Table: github
+DROP TABLE IF EXISTS github;
+
+CREATE TABLE github (
+    id          BIGINT   UNIQUE ON CONFLICT FAIL,
+    name        STRING,
+    htmlurl     STRING,
+    description STRING,
+    createdAt   DATETIME,
+    language    STRING,
+    pushDiscord BOOLEAN
+);
+
+
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;
 PRAGMA journal_mode = WAL;
