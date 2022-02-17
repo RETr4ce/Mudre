@@ -14,3 +14,5 @@ go.sum
 go.mod
 logs.txt
 *.db
+*.db-shm
+*.db-wal
