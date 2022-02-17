@@ -13,3 +13,4 @@
 go.sum
 go.mod
 logs.txt
+*.db
