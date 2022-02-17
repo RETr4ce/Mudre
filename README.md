@@ -13,9 +13,20 @@ URL - https://ctftime.org/
 
 ###### Options
 
-* Download the latest events in a SQLite database every hour. 
+* Download the latest events in a SQLite database. 
 * Posts upcoming events 2 days prior to Discord.
 * Posts latest writeups to Discord 
 * Update the latest dates
 
 ![alt text](https://github.com/RETr4ce/mudre/blob/main/images/image-20220215081215224.png?raw=true)
+
+#### Crackmes
+
+URL - https://crackmes.one/
+
+###### Options
+
+* Pull the last 50 crack me's from crackmes in a SQLite database
+* Post the results to Discord
+
+![alt text](https://github.com/RETr4ce/mudre/blob/main/images/image-20220217014815224.png?raw=true)
