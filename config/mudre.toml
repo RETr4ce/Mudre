@@ -10,3 +10,8 @@ discord-webhook = ""
 crackmes-latest = "https://crackmes.one/rss/crackme"
 crackmes-avatar = "https://i.imgur.com/ZItQiDp.png"
 discord-webhook = ""
+
+[github]
+github-starred = "https://api.github.com/users/retr4ce/starred"
+github-avatar = "https://pbs.twimg.com/profile_images/1414990564408262661/r6YemvF9_400x400.jpg"
+discord-webhook = ""
