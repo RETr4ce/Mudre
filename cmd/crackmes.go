@@ -162,7 +162,7 @@ func crackmesPost(cmd *cobra.Command, args []string) {
 				}
 			}]
 		}`)
-		tools.PostToDiscord(jsonData)
+		tools.PostToDiscord(jsonData, viper.GetString("crackmes.discord-webhook"))
 
 		_, err := stmt.Exec(id)
 

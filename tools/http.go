@@ -6,13 +6,10 @@ import (
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/spf13/viper"
 )
 
-func PostToDiscord(jsonData []byte) {
+func PostToDiscord(jsonData []byte, webhook string) {
 
-	webhook := viper.GetString("ctftime.discord-webhook")
 	client := &http.Client{}
 	req, _ := http.NewRequest("POST", webhook, bytes.NewBuffer(jsonData))
 

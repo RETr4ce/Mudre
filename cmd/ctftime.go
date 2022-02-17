@@ -129,7 +129,7 @@ func ctftUpcoming(cmd *cobra.Command, args []string) {
 				}
 			}]
 		}`)
-		tools.PostToDiscord(jsonData)
+		tools.PostToDiscord(jsonData, viper.GetString("ctftime.discord-webhook"))
 
 		_, err := stmt.Exec(Id)
 
@@ -196,7 +196,7 @@ func ctftWriteup(cmd *cobra.Command, args []string) {
 					}
 				}]
 			}`)
-		tools.PostToDiscord(jsonData)
+		tools.PostToDiscord(jsonData, viper.GetString("ctftime.discord-webhook"))
 
 		_, err := stmt.Exec(id)
 
