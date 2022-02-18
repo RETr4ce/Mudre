@@ -30,3 +30,9 @@ URL - https://crackmes.one/
 * Post the results to Discord
 
 ![alt text](https://github.com/RETr4ce/mudre/blob/main/images/image-20220217014815224.png?raw=true)
+
+
+#### Github
+
+* Push the latest results to Discord
+* Pull the starred github results in a SQLite database
